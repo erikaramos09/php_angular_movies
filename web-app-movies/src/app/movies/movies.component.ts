@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { IMovie } from '../../shared/models/movies';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
+import { HttpClient } from '@angular/common/http';
+import { MoviesAPI } from '../../shared/models/services/MoviesAPI';
 
 const lasMoviesDemo: IMovie[] = [
   {
@@ -21,7 +23,7 @@ const lasMoviesDemo: IMovie[] = [
   },
   {
     id: "3",
-    title: "cheems mamado",
+    title: "cheems fuertote",
     synopsis: "se trata de chocomilk",
     year: 2014,
     cover: "https://i.pinimg.com/736x/a2/c5/13/a2c5137a46fc4d9195ddd6b334bede44.jpg",
@@ -37,10 +39,22 @@ const encontrarMovie = (idBuscar: string, movies: IMovie[]) => movies.find(({id}
   templateUrl: './movies.component.html',
   styleUrl: './movies.component.css'
 })
+
+@Injectable({providedIn: 'root'})
 export class MoviesComponent {
-  movies = lasMoviesDemo;
+  movies: IMovie[] = [];
   moviesAbiertas: IMovie[] = [];
-  tabSeleccionada: string = 'lista-movies'
+  tabSeleccionada: string = 'lista-movies';
+  api: MoviesAPI;
+
+  constructor (private http: HttpClient) {
+    this.api = new MoviesAPI(http);
+    this.cargarMovies();
+  }
+
+  cargarMovies(){
+    this.api.getMovies().subscribe(r => this.movies = r);
+  }
 
   cerrarMovie(event: MouseEvent, idMovieCerrar: string) {
     const indiceActual = this.moviesAbiertas.findIndex(({id}) => id !== idMovieCerrar);
