@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Title</th>
+      <th scope="col">Synopsis</th>
+      <th scope="col">Year</th>
+      <th scope="col">Cover</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (laMovie of movieList; track laMovie.id; let i = $index) {
+    <tr>
+      <th scope="row">{{ laMovie.id }}</th>
+
+      <td><button (click)="emitirMovieId($event, laMovie.id)">{{ laMovie.title }}</button></td>
+      <td>{{ laMovie.synopsis }}</td>
+      <td>{{ laMovie.year }}</td>
+      <td>
+        <img [src]="laMovie.cover" [alt]="'Cover para' + laMovie.title" class="me-2 movieCover" />
+      </td>
+
+    </tr>
+    }
+  </tbody>
+</table>

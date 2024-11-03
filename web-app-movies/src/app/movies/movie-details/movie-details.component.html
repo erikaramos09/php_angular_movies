@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <h4>
+          {{movie.title}} <small class="text-muted">({{movie.year}})</small>
+        </h4>
+      </div>
+
+      <div class="row">
+        <img [src]="movie.cover" [alt]="'Cover para' + movie.title" class="me-2 movieCover col-sm-6" />
+        <div class="col-sm-6">
+          <h6>Synopsis:</h6>
+          <p>{{ movie.synopsis }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

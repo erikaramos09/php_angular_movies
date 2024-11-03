@@ -1,1 +1,24 @@
-<p>movies works!</p>
+<div class="container contenido">
+  <ul ngbNav #nav="ngbNav" [(activeId)]="tabSeleccionada" class="nav-tabs ">
+    <li [ngbNavItem]="'lista-movies'">
+      <button ngbNavLink>Lista Movies</button>
+      <ng-template ngbNavContent >
+        <app-movie-list [movieList]="movies" (seleccionarMovieId)="abrirMovie($event)"></app-movie-list>
+      </ng-template>
+    </li>
+
+    @for (movie of moviesAbiertas; track movie) {
+    <li [ngbNavItem]="movie.id">
+      <button ngbNavLink>
+        {{ movie.title }}
+        <span class="btn-close ms-3 fw-light" (click)="cerrarMovie($event, movie.id)"></span>
+      </button>
+      <ng-template ngbNavContent>
+        <app-movie-details [movie]="movie"></app-movie-details>
+      </ng-template>
+    </li>
+    }
+  </ul>
+
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
