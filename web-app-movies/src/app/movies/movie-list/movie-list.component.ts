@@ -11,9 +11,18 @@ import { IMovie } from '../../../shared/models/movies';
 export class MovieListComponent {
   @Input() movieList!: IMovie[];
   seleccionarMovieId = output<string>();
+  editarMovie = output<IMovie>();
+  borrarMovie = output<string>();
 
   emitirMovieId(event: MouseEvent, movieId: string) {
     event.preventDefault();
     this.seleccionarMovieId.emit(movieId);
   }
+
+  emitirEditarMovie = (movie: IMovie) => {
+    console.log('emitirEditarMovie', movie);
+    this.editarMovie.emit(movie);
+  }
+
+  emitirBorrarMovie = (movieId: string) => this.borrarMovie.emit(movieId);
 }
