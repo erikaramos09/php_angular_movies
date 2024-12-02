@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { IMovie } from "../movies";
 
 export class MoviesAPI {
-  private baseURL: string = 'http://localhost:8000/api/movie';
+  private baseURL: string = 'https://phpangularmovies-production.up.railway.app/api/movie';
   constructor(private http: HttpClient) { }
 
   public getMovies = () => this.http.get<IMovie[]>(this.baseURL);
