@@ -49,7 +49,7 @@ RUN touch /run/php/php8.2-fpm.pid
 COPY ./backend .
 RUN composer install --no-dev
 RUN touch database/database.sqlite
-RUN php artisan migrate:refresh
+RUN yes | php artisan migrate:refresh
 RUN chown -R nobody:nobody /var/www/html/storage
 
 EXPOSE 8000
