@@ -6,15 +6,10 @@ name: Docker Image CI
 # documentation.
 
 on:
-  schedule:
-    - cron: '31 15 * * *'
   push:
     branches: [ "master" ]
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
-  pull_request:
-    branches: [ "master" ]
-
+    tags: [ 'backendmovies.v*.*.*' ]
 env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
@@ -97,11 +92,3 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
-
-
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
