@@ -1,0 +1,20 @@
+services:
+  frontendmovies:
+    build: ./web-app-movies
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    image: "moviesfrontend:latest"
+    networks:
+      - appmoviesnet
+  backendmovies:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    image: "moviesbackend:latest"
+    networks:
+      - appmoviesnet
+
+networks:
+  appmoviesnet:
+    driver: bridge
