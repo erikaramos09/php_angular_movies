@@ -7,7 +7,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "never" ]
     # Publish semver tags as releases.
     tags: [ 'backendmovies.v*.*.*' ]
 env:
